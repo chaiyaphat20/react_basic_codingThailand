@@ -4,6 +4,7 @@ import { Card, CardDeck, Spinner, Button } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 function DetailPage() {
   const { id, title } = useParams();
+  
   const [detail, setDetail] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
