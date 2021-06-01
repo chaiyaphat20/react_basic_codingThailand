@@ -18,14 +18,14 @@ function NavbarCompo() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavLink className="nav-link" to="/" exact activeClassNav="active">
+          <NavLink id="nav-link" to="/" exact activeClassName="active">
             Home
           </NavLink>
           <NavLink
             className="nav-link"
             to="/product"
             exact
-            activeClassNav="active"
+            activeClassName="active"
           >
             Product
           </NavLink>
@@ -33,7 +33,7 @@ function NavbarCompo() {
             className="nav-link"
             to="/about"
             exact
-            activeClassNav="active"
+            activeClassName="active"
           >
             About
           </NavLink>

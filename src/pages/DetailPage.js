@@ -29,7 +29,7 @@ function DetailPage() {
         setLoading(false);
       }
     },
-    [setDetail, detail]
+    [setDetail]
   );
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function DetailPage() {
     return () => {
       cancelToken.current.cancel();
     };
-  }, [id]);
+  }, [id,]);
 
   //step1
   if (loading) {
@@ -53,9 +53,9 @@ function DetailPage() {
   if (error) {
     return (
       <div className="text-center mt-5">
-        <h>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h>
+        <h1>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h1>
         <br />
-        <h>{error}</h>
+        <h1>{error}</h1>
       </div>
     );
   }

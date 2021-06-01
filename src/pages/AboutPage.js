@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 function AboutPage() {
-  const [version, setVersion] = useState("");
+  const [version] = useState("");
   React.useEffect(() => {
     async function getData() {
-      const res = await axios.get("https://api.codingthailand.com/api/version")
-      console.log(res.data)
+      const res = await axios.get("https://api.codingthailand.com/api/version");
+      console.log(res.data);
     }
     getData();
   }, []);

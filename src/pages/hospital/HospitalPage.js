@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Badge, Spinner, Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import Pagination from "react-js-pagination";
-import { BsEyeFill } from "react-icons/bs";
-import { Link, useHistory } from "react-router-dom";
 
 const pageSize = 10;
 function HospitalPage() {
@@ -35,7 +33,7 @@ function HospitalPage() {
         setLoading(false);
       }
     },
-    [setHospital, hospital]
+    [setHospital]
   );
 
   useEffect(() => {
@@ -44,7 +42,7 @@ function HospitalPage() {
     return () => {
       cancelToken.current.cancel();
     };
-  }, [page]);
+  }, [page,]);
 
   const handlePageChange = (pageNumber) =>{
     setPage(pageNumber)
@@ -63,9 +61,9 @@ function HospitalPage() {
   if (error) {
     return (
       <div className="text-center mt-5">
-        <h>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h>
+        <h1>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h1>
         <br />
-        <h>{error}</h>
+        <h1>{error}</h1>
       </div>
     );
   }
