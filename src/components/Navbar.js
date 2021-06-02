@@ -11,7 +11,6 @@ function NavbarCompo() {
   const getProfile = useCallback(async () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps  
     const profileValue = JSON.parse(localStorage.getItem("user"));
-    console.log(profileValue)
     if (profileValue) {
       userStore.updateProfile(profileValue);
     }

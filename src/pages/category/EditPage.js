@@ -49,8 +49,10 @@ function EditPage() {
   }, [id,getData]);
 
   const showErrorClassName = errors.name ? "is-invalid" : "";
+
   return (
     <Container className="mt-5">
+      Edit
       <Col xs={12} md={8}>
         <Row>
           {/* {validationB} */}

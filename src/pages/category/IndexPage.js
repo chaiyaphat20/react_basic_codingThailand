@@ -83,7 +83,7 @@ function IndexPage() {
                   className="ml-3"
                   variant="outline-danger"
                   size="sm"
-                  onClick={() => history.push(`/category/edit/${e.id}`)}
+                  onClick={() => history.replace(`/category/edit/${e.id}`)}
                 >
                   <BsPencil />
                 </Button>

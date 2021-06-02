@@ -52,7 +52,7 @@ function App() {
               <Route path="/login">
                 <LoginPage />
               </Route>
-              <PrivateRoute>
+              <PrivateRoute path="/member">
                 <Member />
               </PrivateRoute>
               <Route
@@ -62,10 +62,10 @@ function App() {
                     <Route path={`${url}/`} exact>
                       <IndexPage />
                     </Route>
-                    <Route path={`${url}/create`}>
+                    <Route path={`${url}/create`} >
                       <CreatePage />
                     </Route>
-                    <Route path={`${url}/edit/:id`}>
+                    <Route path={`${url}/edit/:id`} >
                       <EditPage />
                     </Route>
                   </>
