@@ -1,4 +1,34 @@
+### Pagination
 GET https://api.codingthailand.com/api/hospital2?page=1&page_size15
 
-###
+### react query
 GET https://api.codingthailand.com/api/news?page=1&page_size=3
+
+
+###catagory
+GET https://api.codingthailand.com/api/category
+
+### catagory  create form
+POST https://api.codingthailand.com/api/category
+Content-Type: application/json
+
+{
+  "name":"Test by artsss"
+}
+
+
+###delete catelog
+DELETE  https://api.codingthailand.com/api/category
+
+
+###Get Category by ID
+GET https://api.codingthailand.com/api/category/659
+
+
+### Update Category by ID
+PUT  https://api.codingthailand.com/api/category
+Content-Type: application/json
+
+{ "id":"665",
+  "name":"Test by newnewnwenwnewnewne"
+}

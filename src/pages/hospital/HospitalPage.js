@@ -10,13 +10,14 @@ function HospitalPage() {
   const [error, setError] = useState(null);
   const cancelToken = useRef(null);
 
-  const [totalRecode , setTotalRecord] = useState(0)
+  const [totalRecode, setTotalRecord] = useState(0);
 
   // pagination
   const [page, setPage] = useState(1);
 
   const getData = useCallback(
     async (page) => {
+      console.log("getData , Hospital");
       try {
         setLoading(true);
         const res = await axios.get(
@@ -26,7 +27,7 @@ function HospitalPage() {
           }
         );
         setHospital(res.data.data);
-        setTotalRecord(res.data.meta.pagination.total)
+        setTotalRecord(res.data.meta.pagination.total);
       } catch (error) {
         setError(error.response.data.message);
       } finally {
@@ -37,21 +38,22 @@ function HospitalPage() {
   );
 
   useEffect(() => {
+    console.log("UseEffect , Hospital");
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData(page);
     return () => {
       cancelToken.current.cancel();
     };
-  }, [page,]);
+  }, [page, getData]);
 
-  const handlePageChange = (pageNumber) =>{
-    setPage(pageNumber)
-  }
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
   //step1
   if (loading) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <Spinner animation="border" variant="primary" />;
       </div>
     );
@@ -60,7 +62,7 @@ function HospitalPage() {
   //step2
   if (error) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <h1>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h1>
         <br />
         <h1>{error}</h1>
@@ -70,20 +72,13 @@ function HospitalPage() {
 
   //step3  result จริง
   let comp = (
-    <div className="text-center mt-5">
+    <div className="mt-5 text-center">
       <h1>ไม่พบข้อมูล</h1>
     </div>
   );
   if (hospital.length !== 0) {
     comp = (
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>code</th>
-            <th>Place</th>
-          </tr>
-        </thead>
+      <tbody>
         {hospital.map((e) => (
           <tr key={e.id}>
             <td>{e.id}</td>
@@ -91,21 +86,30 @@ function HospitalPage() {
             <td>{e.h_name}</td>
           </tr>
         ))}
-      </Table>
+      </tbody>
     );
   }
 
   return (
     <div className="container">
-      <div className="row mt-4">
+      <div className="mt-4 row">
         <div className="col-md-12">
           <h2>Hospital </h2>
-          {comp}
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>code</th>
+                <th>Place</th>
+              </tr>
+            </thead>
+            {comp}
+          </Table>
           <Pagination
             activePage={page}
             itemsCountPerPage={pageSize}
             totalItemsCount={totalRecode}
-            pageRangeDisplayed={15}  //แสดง 15แถว
+            pageRangeDisplayed={15} //แสดง 15แถว
             onChange={handlePageChange}
             itemClass="page-item"
             linkClass="page-link"

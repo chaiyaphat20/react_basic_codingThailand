@@ -18,26 +18,26 @@ function ProductPage() {
       });
       console.log(res.data.data);
       setProduct(res.data.data);
-      console.log("product :", product);
     } catch (error) {
       setError(error.response.data.message);
     } finally {
       setLoading(false);
     }
-  }, [setProduct, product]);
+  }, [setProduct]);
   useEffect(() => {
+    console.log("UseEffect , Detail")
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData();
     return () => {
       console.log("Exit Product");
       cancelToken.current.cancel();
     };
-  }, []);
+  }, [getData]);
 
   //step1
   if (loading) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <Spinner animation="border" variant="primary" />;
       </div>
     );
@@ -46,7 +46,7 @@ function ProductPage() {
   //step2
   if (error) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <h>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h>
         <br />
         <h>{error}</h>

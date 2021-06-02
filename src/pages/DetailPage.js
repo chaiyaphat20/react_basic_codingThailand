@@ -33,17 +33,18 @@ function DetailPage() {
   );
 
   useEffect(() => {
+    console.log("UseEffect , Detail")
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData(id);
     return () => {
       cancelToken.current.cancel();
     };
-  }, [id,]);
+  }, [id,getData]);
 
   //step1
   if (loading) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <Spinner animation="border" variant="primary" />;
       </div>
     );
@@ -52,7 +53,7 @@ function DetailPage() {
   //step2
   if (error) {
     return (
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <h1>เกิดข้อผิดพลาดจาก server กรุณาลองใหม่</h1>
         <br />
         <h1>{error}</h1>
@@ -62,7 +63,7 @@ function DetailPage() {
 
   // step3  result จริง
   let comp = (
-    <div className="text-center mt-5">
+    <div className="mt-5 text-center">
       <h1>ไม่พบข้อมูล</h1>
     </div>
   );

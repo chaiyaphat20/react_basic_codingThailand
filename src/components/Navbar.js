@@ -18,7 +18,7 @@ function NavbarCompo() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavLink id="nav-link" to="/" exact activeClassName="active">
+          <NavLink id="nav-link" to="/" className="nav-link" exact activeClassName="active">
             Home
           </NavLink>
           <NavLink
