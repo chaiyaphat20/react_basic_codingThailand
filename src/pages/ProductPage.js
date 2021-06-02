@@ -16,7 +16,6 @@ function ProductPage() {
       const res = await axios.get("https://api.codingthailand.com/api/course", {
         cancelToken: cancelToken.current.token,
       });
-      console.log(res.data.data);
       setProduct(res.data.data);
     } catch (error) {
       setError(error.response.data.message);
@@ -25,11 +24,9 @@ function ProductPage() {
     }
   }, [setProduct]);
   useEffect(() => {
-    console.log("UseEffect , Detail")
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData();
     return () => {
-      console.log("Exit Product");
       cancelToken.current.cancel();
     };
   }, [getData]);

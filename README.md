@@ -12,3 +12,10 @@
 12.การใช้ Toast notification
 13.การทำ Private Rout
 14.การใช้ context api ร่วมกับ local Storage
+
+
+redux setup
+1.สร้าง reducer เป็น function return state ธรรมดา  (switch case)
+2.สร้าง rootReducer  รวม reducer ทั้งหมด
+3.สร้าง store โดย function create store
+4.สร้าง Provider ครอบที่ index.js หรือชั้นบนสุด แล้ว  ส่ง store เข้าไป

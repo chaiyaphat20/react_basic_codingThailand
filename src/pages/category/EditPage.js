@@ -36,7 +36,6 @@ function EditPage() {
 
   const getData = useCallback(
     async (id) => {
-      console.log("gerdata")
       const res = await axios.get(
         `https://api.codingthailand.com/api/category/${id}`
       );

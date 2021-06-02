@@ -17,7 +17,6 @@ function HospitalPage() {
 
   const getData = useCallback(
     async (page) => {
-      console.log("getData , Hospital");
       try {
         setLoading(true);
         const res = await axios.get(
@@ -38,7 +37,6 @@ function HospitalPage() {
   );
 
   useEffect(() => {
-    console.log("UseEffect , Hospital");
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData(page);
     return () => {

@@ -30,7 +30,6 @@ function IndexPage() {
   }, [setCategory]);
 
   useEffect(() => {
-    console.log("useEffect", "indexPage");
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData();
     return () => {

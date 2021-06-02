@@ -5,7 +5,6 @@ function AboutPage() {
   React.useEffect(() => {
     async function getData() {
       const res = await axios.get("https://api.codingthailand.com/api/version");
-      console.log(res.data);
     }
     getData();
   }, []);

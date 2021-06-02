@@ -33,7 +33,6 @@ function CreatePage() {
   };
   //validationB
 
-  console.log(errors.name);
   const showErrorClassName = errors.name ? "is-invalid" : "";
   const showErrorClassNameEmail = errors.email ? "is-invalid" : "";
   return (

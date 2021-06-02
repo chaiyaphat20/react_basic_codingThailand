@@ -21,7 +21,6 @@ function DetailPage() {
             cancelToken: cancelToken.current.token,
           }
         );
-        console.log(res.data.data);
         setDetail(res.data.data);
       } catch (error) {
         setError(error.response.data.message);
@@ -33,7 +32,6 @@ function DetailPage() {
   );
 
   useEffect(() => {
-    console.log("UseEffect , Detail")
     cancelToken.current = axios.CancelToken.source(); //cancel token
     getData(id);
     return () => {
