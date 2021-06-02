@@ -19,3 +19,13 @@ redux setup
 2.สร้าง rootReducer  รวม reducer ทั้งหมด
 3.สร้าง store โดย function create store
 4.สร้าง Provider ครอบที่ index.js หรือชั้นบนสุด แล้ว  ส่ง store เข้าไป
+
+การใช้งาน
+1.get value ด้วย useSelector
+
+import { UserStoreContext } from "../context/UseContext";
+
+  const dataFromRedux = useSelector((state) => state.authState);
+  const { profile } = dataFromRedux;
+
+2.change value ด้วย dispatch

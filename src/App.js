@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import NavbarCompo from "./components/Navbar";
 import PrivateRoute from "./guard/auth";
 import AboutPage from "./pages/AboutPage";
+import Cart from "./pages/Cart";
 import CreatePage from "./pages/category/CreatePage";
 import EditPage from "./pages/category/EditPage";
 import IndexPage from "./pages/category/IndexPage";
@@ -54,6 +55,9 @@ function App() {
               </Route>
               <PrivateRoute path="/member">
                 <Member />
+              </PrivateRoute>
+              <PrivateRoute path="/cart">
+                <Cart />
               </PrivateRoute>
               <Route
                 path="/category"

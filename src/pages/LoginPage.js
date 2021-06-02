@@ -4,6 +4,10 @@ import { useHistory } from "react-router";
 //context api
 import { UserStoreContext } from "../context/UseContext";
 
+//redux
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../redux/actions/authAction"; //action
+
 //Notifications
 import { useToasts } from "react-toast-notifications";
 
@@ -27,6 +31,9 @@ function LoginPage() {
   const { addToast } = useToasts();
   //context api
   const userStore = useContext(UserStoreContext);
+
+  //call redux action
+  const dispatch = useDispatch();
 
   //validationA
   const {
@@ -60,10 +67,13 @@ function LoginPage() {
       // history.push('/')
       // history.go(0)
 
-      //update Profile by context
-      userStore.updateProfile(resProfile.data.data.user);
-      history.replace('/')
-      
+      // //update Profile by context
+      // userStore.updateProfile(resProfile.data.data.user);
+
+      // redux and action
+      dispatch(updateProfile(resProfile.data.data.user));
+
+      history.replace("/");
     } catch (error) {
       console.log(errors);
       addToast(error.response.data.message, { appearance: "error" });

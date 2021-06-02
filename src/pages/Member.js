@@ -1,14 +1,14 @@
-import { useContext } from "react";
-import { UserStoreContext } from "../context/UseContext";
+//redux
+import { useSelector } from "react-redux";
 
   
 function Member() {
-  const userStore = useContext(UserStoreContext);
+  const dataFromRedux = useSelector(state=>state.authState.profile)
   let comp = null
-  if (userStore){
+  if (dataFromRedux){
     comp = (
       <div>
-        {userStore.profile.name} - {userStore.profile.email}
+        {dataFromRedux.name} - {dataFromRedux.email}
       </div>
     )
   }

@@ -1,31 +1,47 @@
 import { useCallback, useContext, useEffect } from "react";
 import { Button, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfile } from "../redux/actions/authAction";
 import { UserStoreContext } from "../context/UseContext";
+
+import { NavLink, useHistory } from "react-router-dom";
 
 function NavbarCompo() {
   const history = useHistory();
-  const userStore = useContext(UserStoreContext);
+  // const userStore = useContext(UserStoreContext);
 
- 
+  //redux
+  const dataFromRedux = useSelector((state) => state.authState);
+  const { profile } = dataFromRedux;
+  const dispatch = useDispatch();
+
   const getProfile = useCallback(async () => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const profileValue = JSON.parse(localStorage.getItem("user"));
     if (profileValue) {
-      userStore.updateProfile(profileValue);
+      // userStore.updateProfile(profileValue);
+      dispatch(updateProfile(profileValue));
     }
   }, []);
-    useEffect(() => {
+  useEffect(() => {
     getProfile();
-    
   }, [getProfile]);
 
-  const logout = () =>{
-    localStorage.clear()
-    userStore.updateProfile(null)
-    history.replace("/")
+  const logout = () => {
+    localStorage.clear();
+    // userStore.updateProfile(null);  /context api
+
+    dispatch(updateProfile(null));
+    history.replace("/");
+  };
+
+  let comp = "";
+  if (profile) {
+    comp = profile.name;
   }
-  
+
   return (
     <Navbar bg="success" expand="lg">
       <NavLink className="navbar-brand" to="/" exact>
@@ -63,11 +79,20 @@ function NavbarCompo() {
 
           <NavLink
             className="nav-link"
+            to="/cart"
+            exact
+            activeClassName="active"
+          >
+            Cart 0 ชิ้น
+          </NavLink>
+
+          <NavLink
+            className="nav-link"
             to="/member"
             exact
             activeClassName="active"
           >
-            For Member
+            For Member {comp}
           </NavLink>
 
           <NavDropdown
@@ -84,7 +109,7 @@ function NavbarCompo() {
           </NavDropdown>
         </Nav>
         <Nav>
-          {!userStore.profile ? (
+          {!dataFromRedux.profile ? (
             <>
               <NavLink
                 className="mr-3 nav-like"
@@ -109,7 +134,8 @@ function NavbarCompo() {
                 activeClassName="active"
               >
                 <p style={{ color: "white" }}>
-                  {userStore.profile.name} role: {userStore.profile.role}
+                  {dataFromRedux.profile.name} role:{" "}
+                  {dataFromRedux.profile.role}
                 </p>
               </NavLink>
               <NavLink
