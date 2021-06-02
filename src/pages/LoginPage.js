@@ -1,6 +1,8 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router";
+//context api
+import { UserStoreContext } from "../context/UseContext";
 
 //Notifications
 import { useToasts } from "react-toast-notifications";
@@ -9,6 +11,7 @@ import { useToasts } from "react-toast-notifications";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useContext } from "react";
 const schema = Yup.object().shape({
   email: Yup.string()
     .required("email ห้ามว่าง")
@@ -22,6 +25,9 @@ const schema = Yup.object().shape({
 function LoginPage() {
   const history = useHistory();
   const { addToast } = useToasts();
+  //context api
+  const userStore = useContext(UserStoreContext);
+
   //validationA
   const {
     register,
@@ -37,22 +43,30 @@ function LoginPage() {
         email: data.email,
         password: data.password,
       });
-      localStorage.setItem('token',JSON.stringify(res.data))
+      localStorage.setItem("token", JSON.stringify(res.data));
 
       addToast("เข้าสู่ระบบเรียบร้อยแล้ว", { appearance: "success" });
 
       //get profile
-      const resProfile = await axios.get("https://api.codingthailand.com/api/profile",{
-        headers:{
-          Authorization:`Bearer ${res.data.access_token}`
+      const resProfile = await axios.get(
+        "https://api.codingthailand.com/api/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${res.data.access_token}`,
+          },
         }
-      })
-      localStorage.setItem('user',JSON.stringify(resProfile.data))
-      history.push('/')
-      history.go(0)
+      );
+      localStorage.setItem("user", JSON.stringify(resProfile.data.data.user));
+      // history.push('/')
+      // history.go(0)
+
+      //update Profile by context
+      userStore.updateProfile(resProfile.data.data.user);
+      history.replace('/')
+      
     } catch (error) {
-      console.log(errors)
-      addToast(error.response.data.message,{appearance:"error"})
+      console.log(errors);
+      addToast(error.response.data.message, { appearance: "error" });
     }
   };
   //validationB

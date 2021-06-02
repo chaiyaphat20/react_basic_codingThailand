@@ -1,20 +1,32 @@
-import { useCallback, useEffect, useState } from "react";
-import { Nav, Navbar, NavDropdown ,Button} from "react-bootstrap";
+import { useCallback, useContext, useEffect } from "react";
+import { Button, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
+import { UserStoreContext } from "../context/UseContext";
 
 function NavbarCompo() {
   const history = useHistory();
-  const [profile, setProfile] = useState(null);
+  const userStore = useContext(UserStoreContext);
+
+ 
   const getProfile = useCallback(async () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps  
     const profileValue = JSON.parse(localStorage.getItem("user"));
-    console.log("Nav Bar" , profileValue)
+    console.log(profileValue)
     if (profileValue) {
-      setProfile(profileValue.data);
+      userStore.updateProfile(profileValue);
     }
   }, []);
-  useEffect(() => {
+    useEffect(() => {
     getProfile();
+    
   }, [getProfile]);
+
+  const logout = () =>{
+    localStorage.clear()
+    userStore.updateProfile(null)
+    history.replace("/")
+  }
+  
   return (
     <Navbar bg="success" expand="lg">
       <NavLink className="navbar-brand" to="/" exact>
@@ -73,7 +85,7 @@ function NavbarCompo() {
           </NavDropdown>
         </Nav>
         <Nav>
-          {!profile ? (
+          {!userStore.profile ? (
             <>
               <NavLink
                 className="mr-3 nav-like"
@@ -98,18 +110,14 @@ function NavbarCompo() {
                 activeClassName="active"
               >
                 <p style={{ color: "white" }}>
-                  {profile.user.name} role: {profile.user.role}
+                  {userStore.profile.name} role: {userStore.profile.role}
                 </p>
               </NavLink>
               <NavLink
                 className="mr-3 nav-like"
-                to="/login"
+                to="/"
                 activeClassName="active"
-                onClick={async () => (
-                  localStorage.clear(),
-                  history.replace('/'),
-                  history.go(0)
-                )}
+                onClick={logout}
               >
                 <Button>ออกจากระบบ</Button>
               </NavLink>
