@@ -13,8 +13,11 @@ function NavbarCompo() {
   // const userStore = useContext(UserStoreContext);
 
   //redux
-  const dataFromRedux = useSelector((state) => state.authState);
-  const { profile } = dataFromRedux;
+  const dataFromRedux = useSelector((state) => state);
+  const { authState, cartState } = dataFromRedux;
+  const { profile } = authState;
+  const { total } = cartState;
+
   const dispatch = useDispatch();
 
   const getProfile = useCallback(async () => {
@@ -83,7 +86,7 @@ function NavbarCompo() {
             exact
             activeClassName="active"
           >
-            Cart 0 ชิ้น
+            Cart {total} ชิ้น
           </NavLink>
 
           <NavLink

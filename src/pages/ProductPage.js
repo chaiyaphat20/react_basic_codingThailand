@@ -3,12 +3,34 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Table, Badge, Spinner } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+
+//redux
+import { addToCart } from "../redux/actions/cartAction";
+import { useDispatch, useSelector } from "react-redux";
+
 function ProductPage() {
   const [product, setProduct] = useState([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const cancelToken = useRef(null);
+
+  //redux
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.cartState);
+  const { cart, total } = data;
+  console.log(cart)
+  const addToCartFn = (e) => {
+    // console.log(e)
+    const product = {
+      id: e.id,
+      titleL: e.name,
+      price: e.view, //สมมุติว่า p.view คือ ราคา
+      qty: 1,
+    };
+
+    dispatch(addToCart(product,cart));
+  };
 
   const getData = useCallback(async () => {
     try {
@@ -51,7 +73,7 @@ function ProductPage() {
     );
   }
 
-   //step3  result จริง
+  //step3  result จริง
   let comp = <div />;
   if (product.length !== 0) {
     comp = product.map((e) => (
@@ -74,11 +96,17 @@ function ProductPage() {
           <Link to={`/detail/${e.id}/title/${e.title}`}>
             <BsEyeFill />
           </Link>
+          <button
+            onClick={() => addToCartFn(e)}
+            className="ml-2 btn btn-outline-success"
+          >
+            Add to Cart
+          </button>
         </td>
       </tr>
     ));
   }
- 
+
   return (
     <div className="container">
       <div className="row">
