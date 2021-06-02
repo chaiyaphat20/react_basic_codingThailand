@@ -32,3 +32,24 @@ Content-Type: application/json
 { "id":"665",
   "name":"Test by newnewnwenwnewnewne"
 }
+
+
+### Login
+POST https://api.codingthailand.com/api/login
+Content-Type: application/json
+
+{ 
+  "email": "art123456@gmail.com",
+	"password": "art123456"
+}
+
+
+### Register
+POST https://api.codingthailand.com/api/register
+Content-Type: application/json
+
+{
+	"name": "art123456",
+	"email": "art123456@gmail.com",
+	"password": "art123456"
+}

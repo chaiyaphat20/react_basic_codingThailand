@@ -5,7 +5,9 @@
 5.การใช้ prop type
 6.การใช้ react query แทน axios
 7.การใช้ cancel TOken
-8.การใช้ raect router dom, history,goBack() , history.push , .raplace  แทน <Link to/>  ,  history.go(0) //เป็นการ refresh หน้า**
+8.การใช้ raect router dom, history,goBack() , history.push , .raplace  แทน <Link to/>  ,  history.go(0) //เป็นการ refresh หน้า** , 
 9. history.push ใช้กับการเปิดหน้าใหม่
 10.// eslint-disable-next-line react-hooks/exhaustive-deps     ลบ warning
-11.uploadไฟล์
+11.uploadไฟล์  video ที่18 ค่อยกลับมาดู
+12.การใช้ Toast notification
+13.การทำ Private Rout

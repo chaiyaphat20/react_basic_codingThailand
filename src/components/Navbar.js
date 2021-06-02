@@ -1,14 +1,20 @@
-import {
-  Button,
-  Form,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from "react-bootstrap";
+import { useCallback, useEffect, useState } from "react";
+import { Nav, Navbar, NavDropdown ,Button} from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
+
 function NavbarCompo() {
   const history = useHistory();
+  const [profile, setProfile] = useState(null);
+  const getProfile = useCallback(async () => {
+    const profileValue = JSON.parse(localStorage.getItem("user"));
+    console.log("Nav Bar" , profileValue)
+    if (profileValue) {
+      setProfile(profileValue.data);
+    }
+  }, []);
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
   return (
     <Navbar bg="success" expand="lg">
       <NavLink className="navbar-brand" to="/" exact>
@@ -18,7 +24,13 @@ function NavbarCompo() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavLink id="nav-link" to="/" className="nav-link" exact activeClassName="active">
+          <NavLink
+            id="nav-link"
+            to="/"
+            className="nav-link"
+            exact
+            activeClassName="active"
+          >
             Home
           </NavLink>
           <NavLink
@@ -38,6 +50,15 @@ function NavbarCompo() {
             About
           </NavLink>
 
+          <NavLink
+            className="nav-link"
+            to="/member"
+            exact
+            activeClassName="active"
+          >
+            For Member
+          </NavLink>
+
           <NavDropdown
             title="WorkShop Pagination + CRUD"
             id="basic-nav-dropdown"
@@ -51,10 +72,50 @@ function NavbarCompo() {
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form>
+        <Nav>
+          {!profile ? (
+            <>
+              <NavLink
+                className="mr-3 nav-like"
+                to="/register"
+                activeClassName="active"
+              >
+                <p style={{ color: "white" }}>สมัครสมาชิก</p>
+              </NavLink>
+              <NavLink
+                className="mr-3 nav-like"
+                to="/login"
+                activeClassName="active"
+              >
+                <p style={{ color: "white" }}>เข้าสู้ระบบ</p>
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                className="mr-3 nav-like"
+                to="/register"
+                activeClassName="active"
+              >
+                <p style={{ color: "white" }}>
+                  {profile.user.name} role: {profile.user.role}
+                </p>
+              </NavLink>
+              <NavLink
+                className="mr-3 nav-like"
+                to="/login"
+                activeClassName="active"
+                onClick={async () => (
+                  localStorage.clear(),
+                  history.replace('/'),
+                  history.go(0)
+                )}
+              >
+                <Button>ออกจากระบบ</Button>
+              </NavLink>
+            </>
+          )}
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );

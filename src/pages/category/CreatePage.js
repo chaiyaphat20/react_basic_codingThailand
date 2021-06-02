@@ -1,5 +1,5 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import axios from 'axios'
+import axios from "axios";
 
 //validationA
 import { useForm } from "react-hook-form";
@@ -14,7 +14,7 @@ const schema = Yup.object().shape({
 //validationB
 
 function CreatePage() {
-  const history = useHistory()
+  const history = useHistory();
 
   //validationA
   const {
@@ -25,11 +25,11 @@ function CreatePage() {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data) => {
-    const apiURL = "https://api.codingthailand.com/api/category"
+    const apiURL = "https://api.codingthailand.com/api/category";
 
-    const res = await axios.post(apiURL,{name:data.name})
-   alert(res.data.message);
-   history.replace('/category')
+    const res = await axios.post(apiURL, { name: data.name });
+    alert(res.data.message);
+    history.replace("/category");
   };
   //validationB
 
@@ -40,7 +40,7 @@ function CreatePage() {
     <Container className="mt-5">
       <Col xs={12} md={8}>
         <Row>
-        {/* {validationB} */}
+          {/* {validationB} */}
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group controlId="formBasicEmail" className="is-invalid">
               <Form.Label>Email Address</Form.Label>
@@ -63,7 +63,7 @@ function CreatePage() {
               />
               <p>{errors.name?.message}</p>
             </Form.Group>
-             {/* {validationB} */}
+            {/* {validationB} */}
             <Button variant="primary" type="submit">
               Submit
             </Button>
