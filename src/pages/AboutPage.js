@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 function AboutPage() {
-  const [version] = useState("");
+  const [version,setVersion] = useState("");
   React.useEffect(() => {
     async function getData() {
       const res = await axios.get("https://api.codingthailand.com/api/version");
+      setVersion(res.data.data.version)
     }
     getData();
   }, []);
@@ -14,7 +15,7 @@ function AboutPage() {
       <div className="row">
         <div className="col-md-12">
           <h2>เกี่ยวกับเรา</h2>
-          <p>Backend {version}</p>
+          <p>Backend Version  {version}</p>
         </div>
       </div>
     </div>

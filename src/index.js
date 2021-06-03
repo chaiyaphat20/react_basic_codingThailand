@@ -6,14 +6,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import reportWebVitals from "./reportWebVitals";
 //redux setup
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import rootReducer from "../src/redux/reducers/index";
-const store = createStore(rootReducer);
+// import { createStore } from "redux";
+
+//persit
+import { PersistGate } from "redux-persist/integration/react";
+import configStore from "./redux/configStore";
+const { store,persistor } = configStore();
+
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <PersistGate loading={null} persistor={persistor}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

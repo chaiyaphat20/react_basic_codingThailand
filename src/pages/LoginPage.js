@@ -1,8 +1,7 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router";
-//context api
-import { UserStoreContext } from "../context/UseContext";
+
 
 //redux
 import { useDispatch } from "react-redux";
@@ -15,7 +14,6 @@ import { useToasts } from "react-toast-notifications";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { useContext } from "react";
 const schema = Yup.object().shape({
   email: Yup.string()
     .required("email ห้ามว่าง")
@@ -29,8 +27,6 @@ const schema = Yup.object().shape({
 function LoginPage() {
   const history = useHistory();
   const { addToast } = useToasts();
-  //context api
-  const userStore = useContext(UserStoreContext);
 
   //call redux action
   const dispatch = useDispatch();

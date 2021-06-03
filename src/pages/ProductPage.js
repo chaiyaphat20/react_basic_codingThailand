@@ -18,8 +18,8 @@ function ProductPage() {
   //redux
   const dispatch = useDispatch();
   const data = useSelector((state) => state.cartState);
-  const { cart, total } = data;
-  console.log(cart)
+  const { cart } = data;
+  console.log(cart);
   const addToCartFn = (e) => {
     // console.log(e)
     const product = {
@@ -29,7 +29,7 @@ function ProductPage() {
       qty: 1,
     };
 
-    dispatch(addToCart(product,cart));
+    dispatch(addToCart(product, cart));
   };
 
   const getData = useCallback(async () => {

@@ -12,7 +12,8 @@
 12.การใช้ Toast notification
 13.การทำ Private Rout
 14.การใช้ context api ร่วมกับ local Storage
-
+15.การใช้ redux ร่วมกับ redux persists เหือนเป็นการเก็บ localstorest แต่ไม่ต้อง set ค่าเอง ทำให้ refresh แล้วค่าไม่หาย
+16.การ ใช้ redux thunk เพื่อ รองรับ code แบบ asynchonous  จำพวก await asynce ที่ actions
 
 redux setup
 1.สร้าง reducer เป็น function return state ธรรมดา  (switch case)

@@ -1,12 +1,11 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Button, Nav, Navbar, NavDropdown } from "react-bootstrap";
-
 //redux
-import { useSelector, useDispatch } from "react-redux";
-import { updateProfile } from "../redux/actions/authAction";
-import { UserStoreContext } from "../context/UseContext";
-
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
+import { updateProfile } from "../redux/actions/authAction";
+
+
 
 function NavbarCompo() {
   const history = useHistory();
@@ -27,7 +26,7 @@ function NavbarCompo() {
       // userStore.updateProfile(profileValue);
       dispatch(updateProfile(profileValue));
     }
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     getProfile();
   }, [getProfile]);
@@ -112,7 +111,7 @@ function NavbarCompo() {
           </NavDropdown>
         </Nav>
         <Nav>
-          {!dataFromRedux.profile ? (
+          {!profile ? (
             <>
               <NavLink
                 className="mr-3 nav-like"
@@ -137,8 +136,8 @@ function NavbarCompo() {
                 activeClassName="active"
               >
                 <p style={{ color: "white" }}>
-                  {dataFromRedux.profile.name} role:{" "}
-                  {dataFromRedux.profile.role}
+                  {profile.name} role:{" "}
+                  {profile.role}
                 </p>
               </NavLink>
               <NavLink
