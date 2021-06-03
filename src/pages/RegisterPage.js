@@ -47,7 +47,6 @@ function RegisterPage() {
   };
   //validationB
 
-  console.log(errors.name);
   const showErrorClassNameUsername = errors.username ? "is-invalid" : "";
   const showErrorClassNameEmail = errors.email ? "is-invalid" : "";
   const showErrorClassNamePassword = errors.password ? "is-invalid" : "";
